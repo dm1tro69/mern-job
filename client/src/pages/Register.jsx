@@ -3,6 +3,7 @@ import Wrapper from "../assets/wrappers/RegisterPage";
 import Logo from "../components/Logo";
 import FormRow from "../components/FormRow";
 import Alert from "../components/Alert";
+import {useAppContext} from "../context/appContext";
 
 const initialState = {
     name: '',
@@ -14,6 +15,9 @@ const initialState = {
 
 const Register = () => {
     const [values, setValues] = useState(initialState)
+
+    const {isLoading, showAlert} = useAppContext()
+
 
     const handleChange = (e) => {
        setValues((prevState) => (
