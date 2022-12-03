@@ -1,0 +1,29 @@
+{
+  "name": "mern-job",
+  "version": "1.0.0",
+  "type": "module",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "start": "nodemon server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dm1tro69/mern-job.git"
+  },
+  "keywords": [],
+  "author": "dm1tro69",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/dm1tro69/mern-job/issues"
+  },
+  "homepage": "https://github.com/dm1tro69/mern-job#readme",
+  "dependencies": {
+    "dotenv": "^16.0.3",
+    "express": "^4.18.2",
+    "mongoose": "^6.7.5"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.20"
+  }
+}
