@@ -3,6 +3,8 @@ import dotenv from 'dotenv'
 import mongoose from "mongoose";
 import {notFoundMiddleware} from "./middleware/not-found.js";
 import {errorHandlerMiddleware} from "./middleware/error-handler.js";
+import authRoutes from "./routes/authRoutes.js";
+import jobsRoutes from "./routes/jobsRoutes.js";
 
 dotenv.config()
 
@@ -17,6 +19,12 @@ const PORT = process.env.PORT || 8000
 app.get('/', (req, res) => {
     res.json({message: 'Hello'})
 })
+
+
+app.use('/api/v1/auth', authRoutes)
+app.use('/api/v1/jobs', jobsRoutes)
+
+
 app.use(notFoundMiddleware)
 app.use(errorHandlerMiddleware)
 
