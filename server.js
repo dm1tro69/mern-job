@@ -1,5 +1,6 @@
 import express from 'express'
 import dotenv from 'dotenv'
+import 'express-async-errors'
 import mongoose from "mongoose";
 import {notFoundMiddleware} from "./middleware/not-found.js";
 import {errorHandlerMiddleware} from "./middleware/error-handler.js";
