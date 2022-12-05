@@ -18,7 +18,7 @@ const Register = () => {
     const [values, setValues] = useState(initialState)
     const navigate = useNavigate()
 
-    const {isLoading, showAlert, displayAlert, registerUser, user} = useAppContext()
+    const {isLoading, showAlert, displayAlert, registerUser, user, loginUser, setupUser} = useAppContext()
 
     useEffect(()=> {
         if (user){
@@ -42,9 +42,9 @@ const Register = () => {
         }
         const currentUser = {name, email, password}
         if (isMember){
-            console.log('already a member')
+            setupUser({currentUser, endPoint: 'login', alertText: 'Login Successful! Redirecting...'})
         }else {
-            registerUser(currentUser)
+            setupUser({currentUser, endPoint: 'register', alertText: 'User Created! Redirecting...'})
         }
 
     }
@@ -52,9 +52,6 @@ const Register = () => {
       setValues({...values, isMember: !values.isMember})
     }
 
-    useEffect(()=> {
-
-    }, [])
 
     return (
         <Wrapper className={'full-page'}>
