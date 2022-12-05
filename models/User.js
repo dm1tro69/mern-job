@@ -23,5 +23,9 @@ userSchema.pre('save', async function () {
 userSchema.methods.createJWT = function () {
     return jwt.sign({userId: this._id}, process.env.JWT, {expiresIn: '1d'})
 }
+userSchema.methods.comparePassword = async function(candidatePassword){
+    const isMatch = await bcrypt.compare(candidatePassword, this.password)
+    return isMatch
+}
 
 export default model('User', userSchema)
