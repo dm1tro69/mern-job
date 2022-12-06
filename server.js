@@ -1,5 +1,6 @@
 import express from 'express'
 import dotenv from 'dotenv'
+import cors from 'cors'
 import 'express-async-errors'
 import mongoose from "mongoose";
 import morgan from 'morgan'
@@ -11,6 +12,7 @@ import jobsRoutes from "./routes/jobsRoutes.js";
 dotenv.config()
 
 const app = express()
+app.use(cors())
 
 if (process.env.NODE_ENV !== 'production'){
     app.use(morgan('dev'))
