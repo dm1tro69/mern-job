@@ -6,6 +6,7 @@ export const deleteJob = async(req, res) => {
 }
 export const getAllJobs = async(req, res) => {
     res.send('getAllJobs')
+
 }
 export const updateJob = async(req, res) => {
     res.send('updateJob')

@@ -37,6 +37,7 @@ export const login = async(req, res) => {
     res.status(StatusCodes.OK).json({user, token, location: user.location})
 }
 export const updateUser = async(req, res) => {
+    console.log(req.user)
     res.send('updateUser')
 }
 
