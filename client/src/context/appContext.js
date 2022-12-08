@@ -3,10 +3,19 @@ import reducer from "./reducer";
 import {
     CLEAR_ALERT,
     DISPLAY_ALERT,
-    LOGIN_USER_BEGIN, LOGIN_USER_ERROR, LOGIN_USER_SUCCESS, LOGOUT_USER,
+    LOGIN_USER_BEGIN,
+    LOGIN_USER_ERROR,
+    LOGIN_USER_SUCCESS,
+    LOGOUT_USER,
     REGISTER_USER_BEGIN,
     REGISTER_USER_ERROR,
-    REGISTER_USER_SUCCESS, SETUP_USER_BEGIN, SETUP_USER_ERROR, SETUP_USER_SUCCESS, TOGGLE_SIDEBAR
+    REGISTER_USER_SUCCESS,
+    SETUP_USER_BEGIN,
+    SETUP_USER_ERROR,
+    SETUP_USER_SUCCESS,
+    TOGGLE_SIDEBAR,
+    UPDATE_USER_BEGIN, UPDATE_USER_ERROR,
+    UPDATE_USER_SUCCESS
 } from "./actions";
 import axios from "axios";
 
@@ -113,12 +122,18 @@ const AppProvider = ({children}) => {
         removeUserToLocalStorage()
     }
     const updateUser = async (currentUser) => {
+        dispatch({type: UPDATE_USER_BEGIN})
         try {
             const {data}= await authFetch.patch('/auth/updateUser', currentUser)
+            const {user, location, token} = data
+            dispatch({type: UPDATE_USER_SUCCESS, payload: {user, location, token}})
+            addUserToLocalStorage({user, location, token})
 
         }catch (e) {
-            console.log(e.message)
+            dispatch({type: UPDATE_USER_ERROR, payload: {msg: e.response.data.message}})
+
         }
+        clearAlert()
     }
 
     return (

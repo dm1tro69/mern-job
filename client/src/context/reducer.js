@@ -1,10 +1,19 @@
 import {
   CLEAR_ALERT,
   DISPLAY_ALERT,
-  LOGIN_USER_BEGIN, LOGIN_USER_ERROR, LOGIN_USER_SUCCESS, LOGOUT_USER,
+  LOGIN_USER_BEGIN,
+  LOGIN_USER_ERROR,
+  LOGIN_USER_SUCCESS,
+  LOGOUT_USER,
   REGISTER_USER_BEGIN,
   REGISTER_USER_ERROR,
-  REGISTER_USER_SUCCESS, SETUP_USER_BEGIN, SETUP_USER_ERROR, SETUP_USER_SUCCESS, TOGGLE_SIDEBAR
+  REGISTER_USER_SUCCESS,
+  SETUP_USER_BEGIN,
+  SETUP_USER_ERROR,
+  SETUP_USER_SUCCESS,
+  TOGGLE_SIDEBAR, UPDATE_USER_BEGIN,
+  UPDATE_USER_ERROR,
+  UPDATE_USER_SUCCESS
 } from "./actions";
 import {initialState} from "./appContext";
 
@@ -129,6 +138,36 @@ const reducer = (state, action) => {
       token: null,
       userLocation: null,
       jobLocation: null
+
+    }
+  }
+  if (action.type === UPDATE_USER_BEGIN){
+    return {
+      ...state,
+      isLoading: true
+
+    }
+  }
+  if (action.type === UPDATE_USER_SUCCESS){
+    return {
+      ...state,
+      showAlert: true,
+      alertType: 'success',
+      alertText: 'User Profile Updated!',
+      isLoading: false,
+      user: action.payload.user,
+      token: action.payload.token,
+      userLocation: action.payload.location,
+      jobLocation: action.payload.location,
+    }
+  }
+  if (action.type === UPDATE_USER_ERROR){
+    return {
+      ...state,
+      isLoading: false,
+      showAlert: true,
+      alertType: 'danger',
+      alertText: action.payload.msg
 
     }
   }
