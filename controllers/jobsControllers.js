@@ -8,7 +8,7 @@ export const createJob = async (req, res) => {
         throw new BadRequestError('Please Provide All Values')
     }
     req.body.createdBy = req.user.userId
-    const job = Job.create(req.body)
+    const job = await Job.create(req.body)
    res.status(StatusCodes.CREATED).json({job})
 }
 export const deleteJob = async(req, res) => {

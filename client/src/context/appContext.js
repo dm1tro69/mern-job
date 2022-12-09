@@ -32,7 +32,15 @@ export const initialState = {
     token: token,
     userLocation: userLocation || '',
     jobLocation: userLocation || '',
-    showSidebar: false
+    showSidebar: false,
+    isEditing: false,
+    editJobId: '',
+    position: '',
+    company: '',
+    jobTypeOptions: ['full-time', 'part-time', 'remote', 'internship'],
+    jobType: 'full-time',
+    statusOptions: ['pending', 'interview', 'declined'],
+    status: 'pending'
 }
 
 
