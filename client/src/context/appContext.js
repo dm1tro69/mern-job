@@ -1,8 +1,8 @@
 import {createContext, useContext, useReducer, useState} from "react";
 import reducer from "./reducer";
 import {
-    CLEAR_ALERT,
-    DISPLAY_ALERT,
+    CLEAR_ALERT, CLEAR_VALUES, CREATE_JOB_BEGIN, CREATE_JOB_ERROR, CREATE_JOB_SUCCESS,
+    DISPLAY_ALERT, HANDLE_CHANGE,
     LOGIN_USER_BEGIN,
     LOGIN_USER_ERROR,
     LOGIN_USER_SUCCESS,
@@ -143,9 +143,29 @@ const AppProvider = ({children}) => {
         }
         clearAlert()
     }
+    const handleChange = ({name, value}) => {
+       dispatch({type: HANDLE_CHANGE, payload: {name, value}})
+    }
+    const clearValues = () => {
+       dispatch({type: CLEAR_VALUES})
+    }
+    const createJob = async () => {
+       dispatch({type: CREATE_JOB_BEGIN})
+        try {
+            const {position, company, jobLocation, jobType, status, token} = state
+            await authFetch.post('/jobs', {
+                position, company, jobLocation, jobType, status, token
+            })
+            dispatch({type: CREATE_JOB_SUCCESS})
+            dispatch({type: CLEAR_VALUES})
+        }catch (e) {
+            dispatch({type: CREATE_JOB_ERROR, payload: {msg: e.response.data.message}})
+        }
+        clearAlert()
+    }
 
     return (
-        <AppContext.Provider value={{...state, logOut, displayAlert, registerUser, loginUser, setupUser, toggleSidebar, initialState, updateUser}}>
+        <AppContext.Provider value={{...state, logOut, displayAlert, registerUser, loginUser, setupUser, toggleSidebar, initialState, updateUser, handleChange, clearValues, createJob}}>
             {children}
         </AppContext.Provider>
     )
