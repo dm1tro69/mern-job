@@ -15,7 +15,8 @@ export const deleteJob = async(req, res) => {
     res.send('deleteJob')
 }
 export const getAllJobs = async(req, res) => {
-    res.send('getAllJobs')
+    const jobs = await Job.find({createdBy: req.user.userId})
+    res.status(StatusCodes.OK).json({jobs, totalJobs: jobs.length, numOfPages: 1})
 
 }
 export const updateJob = async(req, res) => {
